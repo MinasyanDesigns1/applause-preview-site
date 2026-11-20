@@ -972,6 +972,31 @@ td.num,th.num{font-weight:700;font-size:1.02rem}
 .checks.in-faq li{font-weight:400}
 @media (max-width:900px){ .benefits-grid{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:620px){ .checks.two{columns:1} }
+
+/* Admin team on the home page (Jerry, Nov 20) */
+.admin-row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(1.5rem,4vw,3rem);align-items:start;margin-top:clamp(2.5rem,5vw,4rem);padding-top:clamp(2rem,4vw,3rem);border-top:1px solid var(--line)}
+.admin-title{font-size:clamp(1.15rem,1rem + .5vw,1.45rem);font-weight:700;line-height:1.2}
+.staff-grid.compact{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:1.25rem 1rem}
+.staff-grid.compact strong{font-size:.95rem}
+.staff-grid.compact em{font-size:.66rem}
+@media (max-width:900px){ .admin-row{grid-template-columns:minmax(0,1fr)} }
+
+/* Links page: link-in-bio for social profiles (#links) */
+body.is-links .topbar,body.is-links .site-header,body.is-links .site-footer,body.is-links .mbar,body.is-links .chat-fab,body.is-links .rev-pop{display:none!important}
+.links-page{min-height:100vh;min-height:100dvh;background:radial-gradient(120% 60% at 50% 0%,var(--wine) 0%,var(--stage) 70%);color:var(--cream);padding:clamp(2.5rem,7vw,4.5rem) 16px 3rem}
+.links-wrap{max-width:520px;margin:0 auto;text-align:center;display:grid;gap:1rem;justify-items:center}
+.links-logo{width:120px;height:auto}
+.links-page h1{font-size:clamp(1.6rem,1.2rem + 2vw,2.2rem);line-height:1.05;margin:.4rem 0 0}
+.links-tag{color:var(--mist);font-size:.95rem;margin:0}
+.links-list{list-style:none;padding:0;margin:.75rem 0 0;display:grid;gap:.75rem;width:100%}
+.link-btn{display:flex;align-items:center;justify-content:center;min-height:56px;padding:.8rem 1.25rem;border-radius:999px;background:var(--cream);color:var(--ink);font-weight:600;text-decoration:none;text-align:center;line-height:1.25;transition:background-color .2s,color .2s,transform .2s}
+.link-btn:hover{background:var(--rose);color:var(--ink)}
+.link-btn.is-trial{background:var(--trial);color:#fff}
+.link-btn.is-trial:hover{background:var(--trial-deep);color:#fff}
+.links-call,.links-social,.links-home{margin:0;font-size:.95rem;color:var(--mist)}
+.links-call a,.links-social a,.links-home a{color:var(--cream)}
+.links-social{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.2rem;margin-top:.5rem}
+.links-home{margin-top:.75rem}
 </style>
 </head>
 <body>
@@ -1183,7 +1208,6 @@ const OPUS1_CHAT_CONFIG = null;
      name         as families should see it, e.g. "Ms. Lena"
      photo        square photo (360 × 360 or larger); use null until a photo is ready
      instruments  instrument ids from section 3, e.g. ["piano", "voice"]
-     studios      location ids from section 4: "glendora", "rancho-cucamonga", "upland", "online"
      booking      that teacher's Opus1 self-booking link (opens with the teacher already selected)
      bio          one or more paragraphs
      credentials  degrees and training (optional)
@@ -1195,7 +1219,6 @@ const TEACHERS = [
     id: "mr-aaron", name: "Mr. Aaron",
     photo: "img/staff/mr-aaron-360.webp",
     instruments: ["cello"],
-    studios: ["glendora", "online"],
     booking: "https://applausemusicacademy.opus1.io/w/aaron?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Aaron performs across classical, chamber, contemporary, pop, and worship music. His experience includes orchestral appearances, professional recording sessions, and performances at venues including Walt Disney Concert Hall and Ambassador Auditorium.",
@@ -1207,7 +1230,6 @@ const TEACHERS = [
     id: "ms-saylor", name: "Ms. Saylor",
     photo: "img/staff/ms-saylor-360.webp",
     instruments: ["guitar", "piano", "voice"],
-    studios: ["online", "rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/saylor?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Saylor has trained in pop, rock, jazz, musical theater, and opera, and has taught choir and private lessons. She completed the MTAC Certificate of Merit program through Panel level.",
@@ -1219,7 +1241,6 @@ const TEACHERS = [
     id: "jorge", name: "Mr. Jorge",
     photo: "img/staff/jorge-360.webp",
     instruments: ["guitar", "bass-guitar"],
-    studios: ["online", "rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/jorge?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Jorge is a guitarist, bassist, composer, and vocalist whose interests span classical, rock, jazz, and indie music. He has extensive experience adapting instruction for students with special needs.",
@@ -1231,7 +1252,6 @@ const TEACHERS = [
     id: "ms-gabby", name: "Ms. Gabby", home: true,
     photo: "img/staff/ms-gabby-360.webp",
     instruments: ["piano", "voice"],
-    studios: ["upland"],
     booking: "https://applausemusicacademy.opus1.io/w/gabby?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Gabby’s collegiate choral experiences at California State University, Fullerton included performances at the Hollywood Bowl, Walt Disney Concert Hall, and Honda Center. She has collaborated with the LA Phil under Gustavo Dudamel and performed in productions featuring Jennifer Hudson and Andrea Bocelli.",
@@ -1244,7 +1264,6 @@ const TEACHERS = [
     photo: "img/staff/natalie-360.webp",
     instruments: ["piano", "voice", "guitar", "composition"],
     alsoTeaches: ["Audition Preparation"],
-    studios: ["glendora", "online"],
     booking: "https://applausemusicacademy.opus1.io/w/natalie?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Natalie’s training includes a performing arts high school in Los Angeles, music college studies in Boston, and a master’s degree in Music Education from a Southern California university.",
@@ -1256,7 +1275,6 @@ const TEACHERS = [
     id: "mr-cedric", name: "Mr. Cedric",
     photo: "img/staff/mr-cedric-360.webp",
     instruments: ["drums", "piano", "saxophone", "ukulele", "voice"],
-    studios: ["glendora", "online", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/cedric?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Cedric teaches drums, percussion, saxophone, piano, ukulele, and voice. He has performed with bands and at live events, bringing a broad musical perspective to lessons.",
@@ -1268,7 +1286,6 @@ const TEACHERS = [
     id: "carolyn", name: "Ms. Carolyn",
     photo: "img/staff/carolyn-360.webp",
     instruments: ["piano", "violin"],
-    studios: ["online", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/carolyn?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Carolyn teaches private and group lessons and has performed with orchestras for more than four decades. Her experience also includes elementary general music, church music, and managing a string quartet.",
@@ -1280,7 +1297,6 @@ const TEACHERS = [
     id: "tony", name: "Mr. Tony", home: true,
     photo: "img/staff/tony-360.webp",
     instruments: ["piano", "viola", "violin"],
-    studios: ["glendora", "online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/tony?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Tony holds undergraduate qualifications in psychology and applied music performance. He uses ideas from both fields to adapt lessons to each student’s learning style and motivation.",
@@ -1292,7 +1308,6 @@ const TEACHERS = [
     id: "sean", name: "Mr. Sean",
     photo: "img/staff/sean-360.webp",
     instruments: ["cello"],
-    studios: ["glendora", "online", "rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/sean?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Sean performs with regional symphony orchestras and chamber ensembles, and has collaborated across rock, country, Latin, and jazz. His work includes live events and recordings.",
@@ -1304,7 +1319,6 @@ const TEACHERS = [
     id: "armando", name: "Mr. Armando",
     photo: "img/staff/armando-360.webp",
     instruments: ["guitar", "piano", "voice", "ukulele"],
-    studios: ["online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/armando?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Armando began on electric guitar and developed experience through academic, community, choral, and cultural music projects.",
@@ -1316,7 +1330,6 @@ const TEACHERS = [
     id: "doris", name: "Ms. Doris",
     photo: "img/staff/doris-360.webp",
     instruments: ["piano", "viola", "violin"],
-    studios: ["rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/doris?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Doris brings more than 27 years of teaching and performance experience. She teaches violin at all levels and viola and piano from beginner through late-intermediate levels.",
@@ -1328,7 +1341,6 @@ const TEACHERS = [
     id: "james", name: "Mr. James", home: true,
     photo: "img/staff/james-360.webp",
     instruments: ["cello"],
-    studios: ["glendora", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/james?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "James has more than 12 years of performance experience in solo, chamber, and orchestral settings, including ensemble leadership and international touring.",
@@ -1340,7 +1352,6 @@ const TEACHERS = [
     id: "paige", name: "Ms. Paige", home: true,
     photo: "img/staff/paige-360.webp",
     instruments: ["clarinet", "flute", "saxophone"],
-    studios: ["online", "rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/paige?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Paige’s experience includes orchestral, marching, and jazz ensembles, with flute as her primary instrument. Jazz has given her opportunities to perform on multiple woodwinds.",
@@ -1352,7 +1363,6 @@ const TEACHERS = [
     id: "joshua", name: "Mr. Joshua", home: true,
     photo: "img/staff/joshua-360.webp",
     instruments: ["piano", "voice"],
-    studios: ["glendora", "online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/joshua?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Joshua brings more than a decade of singing experience, including opera, concerts, choral ensembles, international performances, and a televised holiday concert.",
@@ -1364,7 +1374,6 @@ const TEACHERS = [
     id: "kimberly", name: "Ms. Kimberly", home: true,
     photo: "img/staff/kimberly-360.webp",
     instruments: ["piano", "voice"],
-    studios: ["online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/kimberly?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Kimberly’s graduate training included operatic and concert performances and recognition in a competitive young artist setting.",
@@ -1376,7 +1385,6 @@ const TEACHERS = [
     id: "raphaela", name: "Ms. Raphaela",
     photo: "img/staff/raphaela-360.webp",
     instruments: ["piano", "viola", "violin"],
-    studios: ["glendora", "online"],
     booking: "https://applausemusicacademy.opus1.io/w/raphaela?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Raphaela teaches and performs while contributing to orchestral leadership in youth and professional ensemble settings.",
@@ -1388,7 +1396,6 @@ const TEACHERS = [
     id: "anthony", name: "Mr. Anthony", home: true,
     photo: "img/staff/anthony-360.webp",
     instruments: ["clarinet", "drums", "piano", "trombone", "trumpet"],
-    studios: ["online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/anthony?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Anthony teaches drums, trumpet, clarinet, trombone, and introductory piano. His performance experience includes playing several instruments and singing in live band settings.",
@@ -1400,7 +1407,6 @@ const TEACHERS = [
     id: "justyna", name: "Dr. Justyna", home: true,
     photo: "img/staff/justyna-360.webp",
     instruments: ["piano"],
-    studios: ["glendora"],
     booking: "https://applausemusicacademy.opus1.io/w/justyna?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Justyna studied in Europe and the United States and has worked as a soloist, collaborative pianist, and educator. Her interests include piano ensemble and four-hands repertoire.",
@@ -1412,7 +1418,6 @@ const TEACHERS = [
     id: "philip", name: "Mr. Philip",
     photo: "img/staff/philip-360.webp",
     instruments: ["guitar", "piano", "ukulele", "voice"],
-    studios: ["glendora", "online", "rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/philip?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Philip has more than 13 years of experience with multiple instruments. Beginning on piano, he later explored guitar, singing, songwriting, and live performance.",
@@ -1424,7 +1429,6 @@ const TEACHERS = [
     id: "abi", name: "Ms. Abi", home: true,
     photo: "img/staff/abi-360.webp",
     instruments: ["piano", "violin"],
-    studios: ["glendora", "online"],
     booking: "https://applausemusicacademy.opus1.io/w/abi?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Abi has more than 15 years of performance experience as a soloist and chamber musician across California and the United States, with advanced study in national and international programs.",
@@ -1436,7 +1440,6 @@ const TEACHERS = [
     id: "jonah", name: "Mr. Jonah", home: true,
     photo: "img/staff/jonah-360.webp",
     instruments: ["guitar", "bass-guitar", "drums", "piano", "voice", "saxophone", "composition"],
-    studios: ["glendora", "online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/jonah?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Jonah teaches guitar, bass, drums, voice, piano, saxophone, music production, songwriting, and composition. He holds a BA in Music with studies focused on guitar, voice, commercial composition, and recording arts.",
@@ -1448,7 +1451,6 @@ const TEACHERS = [
     id: "david", name: "Mr. David",
     photo: "img/staff/david-360.webp",
     instruments: ["guitar", "bass-guitar", "drums"],
-    studios: ["glendora", "online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/david?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "David’s collegiate training included leadership and section roles in orchestral, band, and percussion ensembles.",
@@ -1460,7 +1462,6 @@ const TEACHERS = [
     id: "catherine", name: "Ms. Catherine",
     photo: "img/staff/catherine-360.webp",
     instruments: ["piano"],
-    studios: ["glendora", "online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/catherine?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Catherine brings experience in solo piano, chamber music, and ensemble performance, including advanced studies, competitions, and touring.",
@@ -1472,7 +1473,6 @@ const TEACHERS = [
     id: "victoria", name: "Ms. Victoria", home: true,
     photo: "img/staff/victoria-360.webp",
     instruments: ["viola", "violin"],
-    studios: ["glendora", "online", "rancho-cucamonga"],
     booking: "https://applausemusicacademy.opus1.io/w/victoria?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Victoria’s experience includes international ensemble performances and concerto appearances with university orchestras. Her biography describes more than 16 years playing violin and approximately eight years teaching.",
@@ -1484,7 +1484,6 @@ const TEACHERS = [
     id: "noah", name: "Mr. Noah",
     photo: "img/staff/noah-360.webp",
     instruments: ["piano", "ukulele", "voice"],
-    studios: ["glendora", "online", "rancho-cucamonga", "upland"],
     booking: "https://applausemusicacademy.opus1.io/w/noah?promoId=16cb3bd1-28d9-4f86-845f-bc820d028734",
     bio: [
       "Noah’s background includes choral singing and collegiate studies in songwriting, performance, recording, and keyboard skills. He holds a BA in Music.",
@@ -1496,7 +1495,6 @@ const TEACHERS = [
     id: "ms-sage", name: "Ms. Sage", home: true,
     photo: "img/staff/sage-360.webp",
     instruments: ["voice", "piano"],
-    studios: [],
     booking: "https://applausemusicacademy.opus1.io/w/sage",
     bio: [
       "Ms. Sage is an accomplished vocalist and music educator with a Master’s Degree in Music Performance and a passion for helping students grow in confidence, creativity, and musical skill. Her background includes experience in classical, opera, musical theatre, pop, jazz, and contemporary music, giving her a versatile foundation as both a performer and teacher.",
@@ -1508,7 +1506,6 @@ const TEACHERS = [
     id: "mr-brandon", name: "Mr. Brandon",
     photo: "img/staff/brandon-360.webp",
     instruments: ["drums"],
-    studios: [],
     booking: "https://applausemusicacademy.opus1.io/w/brandon",
     bio: [
       "Mr. Brandon is a dedicated drummer and music educator with a background in jazz and contemporary music. Through performing in a variety of ensemble settings, he has developed a strong understanding of rhythm, musical collaboration, and the important role a drummer plays in creating a confident and cohesive musical foundation.",
@@ -1520,7 +1517,6 @@ const TEACHERS = [
     id: "ms-tiana", name: "Ms. Tiana",
     photo: "img/staff/tiana-360.webp",
     instruments: ["flute", "clarinet", "voice", "saxophone", "trumpet", "trombone"],
-    studios: [],
     booking: "https://applausemusicacademy.opus1.io/w/tiana",
     bio: [
       "Ms. Tiana is a dedicated musician and educator with bachelor’s degrees in Music Performance and Music Education. She is currently pursuing a master’s degree in Clarinet Performance and brings experience in orchestral, mariachi, dance band, and studio recording settings. In addition to clarinet, she performs on tenor saxophone and enjoys exploring composition and arranging.",
@@ -1532,7 +1528,6 @@ const TEACHERS = [
     id: "mr-alex", name: "Mr. Alex",
     photo: "img/staff/alex-360.webp",
     instruments: ["guitar", "ukulele", "bass-guitar"],
-    studios: [],
     booking: "https://applausemusicacademy.opus1.io/w/alex",
     bio: [
       "Mr. Alex is a guitarist, composer, and music educator who enjoys helping students build confidence, explore their creativity, and discover music they love. His musical journey began with classic rock and heavy metal before expanding into classical guitar and composition. He holds a Bachelor of Music in Music Composition, graduating summa cum laude.",
@@ -1546,7 +1541,6 @@ const TEACHERS = [
     id: "mr-julian", name: "Mr. Julian",
     photo: "img/staff/julian-360.webp",
     instruments: ["guitar", "bass-guitar", "drums", "ukulele"],
-    studios: [],
     booking: "https://applausemusicacademy.opus1.io/w/julian",
     bio: [
       "Mr. Julian is a multi-instrumentalist and vocalist with 17 years of professional experience. He specializes in bass and upright slap bass, with additional experience in guitar, mandolin, banjo, piano, keyboards, drums, percussion, and accordion. His passion for exploring musical traditions from around the world reflects his belief that music connects people across cultures and offers a powerful way to express our shared humanity.",
@@ -1567,6 +1561,7 @@ const FOUNDER = {
   credentials: ["Doctor of Musical Arts — University of Colorado Boulder", "Bachelor of Music in Piano Performance — CSU Fullerton", "Master of Music in Piano Performance — CSU Fullerton", "MTNA and MTAC member"]
 };
 
+/* Admin team: shown on About Us, the home page (under the teachers) and the Teachers page. */
 const FRONT_DESK = [
   { id: "christina", name: "Christina", role: "Manager", photo: "img/staff/christina-360.webp", about: "Enjoys pop, folk, and Christmas music, along with reading, crochet, games, and scuba diving." },
   { id: "ashley", name: "Ashley", role: "Admin", photo: "img/staff/ashley-360.webp", about: "Enjoys alternative rock, indie pop, and folk music, and spends time playing games, working out, and playing guitar." },
@@ -2025,7 +2020,7 @@ const PROGRAMS = [
   { id: "online", name: "Online & hybrid", tag: "From home or the studio", price: () => "Online, in person or both",
     title: "Lessons that fit your week.",
     text: "Learn online full time, or mix online and in-person lessons in a hybrid schedule that fits your week. Private lessons with an Applause teacher, from wherever you are.",
-    facts: () => [["Format", "Private lessons by video, or a mix of online and studio lessons"], ["Teachers", TEACHERS.filter(t => t.studios.includes("online")).length + " teachers teach online"], ["In person", "Glendora, Rancho Cucamonga & Upland"], ["Tuition", "Ask the front desk"]],
+    facts: () => [["Format", "Private lessons by video, or a mix of online and studio lessons"], ["In person", "Glendora, Rancho Cucamonga & Upland"], ["Tuition", "Ask the front desk"]],
     /* Studio photo for now: swap in a real online lesson photo when one is taken */
     img: "shoot/online-real", w: [640, 1024, 1600], pos: "50% 50%", alt: "A smiling young girl at the grand piano with her music book open" },
   { id: "exam-prep", name: "Exam preparation", tag: "A clear next milestone", price: () => "Ask about exam fees",
@@ -2038,6 +2033,27 @@ const PROGRAMS = [
 /* Member benefits, in Applause's own words (Jerry, Nov 18; also in their information packet).
    Shown on the home page ("Why families join us"), the Pricing page (monthly plan),
    About Us and the FAQ. */
+/* Links page (#links): a link-in-bio page for Instagram, TikTok and Facebook bios,
+   like Linktree but on Applause's own site. Edit, add or reorder buttons here.
+   "trial" and "portal" use LINKS; "#..." opens a page on this site. */
+const LINK_PAGE = {
+  tagline: "Music lessons in Glendora, Rancho Cucamonga, Upland & online",
+  buttons: [
+    { label: "Book a Trial Lesson", href: "trial", style: "trial" },
+    { label: "Student Log In", href: "portal" },
+    { label: "January Recitals: Tickets & Sign-Up", href: "#recital", until: "2027-01-24" },
+    { label: "Animal Adventures (Ages 2.5 to 5)", href: "#animal-adventures" },
+    { label: "Pricing & Member Benefits", href: "#pricing" },
+    { label: "Meet Our Teachers", href: "#teachers" },
+    { label: "Academy Calendar", href: "#calendar" },
+    { label: "Locations", href: "#locations" },
+    { label: "Read Our Reviews", href: "reviews" },
+    { label: "Join Our Team", href: "#join" },
+    { label: "Contact Us", href: "#contact" }
+  ],
+  social: [["Instagram", "instagram"], ["Facebook", "facebook"], ["YouTube", "youtube"], ["TikTok", "tiktok"]]
+};
+
 const MEMBER_BENEFITS = [
   "Highly qualified instructors who are FBI background checked and DOJ cleared for your peace of mind",
   "Unlimited make-up options",
@@ -2077,9 +2093,9 @@ const JOIN = [
 const NOTES = [
   ["New in version 9", "Only Applause's own photos: the instrument tiles, semi-private, online and Join Our Team photos now use the original photoshoot images with their colorful walls and a light touch-up. Viola, bass guitar, trombone and composition are listed under More instruments until photos are taken. Trial buttons are Applause blue. Animal Adventures tuition is on the Pricing page, and the monthly plan benefits say they apply to the monthly payment plan only. Menus are in title case and no longer list Recitals or Recital programs. Mr. Alex, Mr. Julian and Kymora are added, and Ms. Sage and Ms. Tiana have their photos. The Calendar page has the printable 2026 and 2027 calendars and the 2027 closures. The Contact page uses the Opus1 lead form. From Jerry (Nov 18): a \"Why families join us\" member benefits section on the home page, the same benefits on the Pricing page, About Us and in the FAQ, \"Call\" instead of \"Call or text\" everywhere, and the crossed-out pricing and FAQ lines removed. The FAQ is now Applause's own content (Jerry, Nov 19), the home page shows the 12 teachers Jerry picked, and the front desk photo was brightened (lighting matched to a Higgsfield relight; people and details are the original photo)."],
   ["Animal Adventures", "The program copy is the example text Animal Adventures in Music provides to member studios. Applause enrolls ages 2.5 to 5. Tuition ($162 a month for weekly 30-minute lessons) is from the current pricing page. The official logo and the 10-books graphic go where the text lockup sits now."],
-  ["One place to edit", "Teachers, front desk staff, instruments, studios, prices, calendar events, calendar images, the recital, charter information and FAQ all come from one content file (data.js), laid out the way the WordPress screens will be. Adding or removing a teacher there updates the Teachers page, every instrument and studio page, and the home page."],
+  ["One place to edit", "Teachers, front desk staff, instruments, studios, prices, calendar events, calendar images, the recital, charter information and FAQ all come from one content file (data.js), laid out the way the WordPress screens will be. Adding or removing a teacher there updates the Teachers page, every instrument page and the home page."],
   ["Book with a teacher", "Each teacher's \"Book with\" button opens that teacher's own Opus1 booking link from the current website, so the teacher is already selected. Nothing is booked from this preview."],
-  ["New teachers", "Mr. Alex, Mr. Julian, Ms. Sage, Ms. Tiana and Mr. Brandon are from the current Meet Our Teachers page. Their studios aren't listed there yet, so none is shown."],
+  ["Teachers and studios", "Teachers aren't tied to a studio on the site (Jerry, Nov 20): they cover several locations and update their availability often, and the Opus1 booking page shows who's available at each studio and time. The admin team appears on the home page, the Teachers page and About Us. A links page for social media bios is at #links."],
   ["Calendar", "The calendar is built from the events list and opens on the current month. Closures shade the days. The 2027 closures and recital weekends come from the printed 2027 calendar. Holiday names next to closures are labels added for clarity and can be edited. Selecting a printed calendar opens the print dialog."],
   ["Map", "Map data © OpenStreetMap contributors. The pins, marked with the Applause logo symbol, are approximate."],
   ["Reviews", "Reviews appear in a pop-up in the bottom-left corner of every page. The selected five-star reviews and the 4.81 average from 166 Google and Yelp reviews were captured on October 1, 2026 from the Opus1 review feed on applausemusicacademy.com. Review text is unedited. For launch, embed the live Opus1 review widget so ratings stay current."],
@@ -2114,9 +2130,7 @@ const LOC = Object.fromEntries(LOCATIONS.map(l => [l.id, l]));
 const STUDIOS = LOCATIONS.filter(l => !l.online);
 const instIndex = id => INSTRUMENTS.findIndex(i => i.id === id);
 const teacherInst = t => t.instruments.filter(id => INST[id]).sort((a, b) => instIndex(a) - instIndex(b));
-const teacherStudios = t => LOCATIONS.filter(l => t.studios.includes(l.id));
 const teachersFor = id => TEACHERS.filter(t => t.instruments.includes(id));
-const teachersAt = id => TEACHERS.filter(t => t.studios.includes(id));
 const instName = id => INST[id].name;
 const instHref = id => "#instrument-" + id;
 const locHref = id => "#location-" + id;
@@ -2213,6 +2227,9 @@ const recitalCard = () => {
   <div class="event-links"><a class="text-link" href="#recital">Performance details</a><a class="text-link" href="#calendar">Academy calendar</a></div></aside>`;
 };
 
+/* Admin team (front desk). compact = photo, role and name only (home page) */
+const staffGrid = (compact = false) => `<div class="staff-grid${compact ? " compact" : ""}">${FRONT_DESK.map(s => `<div class="staff"><img src="${s.photo}" alt="Portrait of ${esc(s.name)}" width="360" height="360" loading="lazy"><div><em>${esc(s.role)}</em><br><strong>${esc(s.name)}</strong></div>${compact ? "" : `<span>${esc(s.about)}</span>`}</div>`).join("")}</div>`;
+
 /* Teacher cards */
 const tCard = t => `<a class="t-card" href="#teachers.t-${t.id}">
   <span class="frame">${tPhoto(t)}</span>
@@ -2222,7 +2239,6 @@ const tbCard = (t, hide = null) => `<article class="tb-card">
   <div class="tb-body">
     <h3><a href="#teachers.t-${t.id}">${esc(t.name)}</a></h3>
     <p class="tb-inst">${esc(teacherInst(t).map(instName).join(", "))}</p>
-    <p class="tb-where">${t.studios.length ? esc(teacherStudios(t).map(locLabel).join(" · ")) : "Studio to be confirmed"}</p>
     <div class="tb-actions">${bookBtn(t)}<a class="text-link" href="#teachers.t-${t.id}">Read bio</a></div>
   </div></article>`;
 
@@ -2238,9 +2254,9 @@ function mapFig(active = null) {
   </figure>`;
 }
 const locCard = l => l.online
-  ? `<article class="loc online"><h3>Online</h3><p>${l.about}</p><ul class="tags"><li class="tag">${plural(teachersAt("online").length, "teacher", "teachers")}</li></ul><a class="text-link" href="${locHref("online")}">Online lessons</a></article>`
+  ? `<article class="loc online"><h3>Online</h3><p>${l.about}</p><ul class="tags"><li class="tag">Private lessons</li><li class="tag">Hybrid</li></ul><a class="text-link" href="${locHref("online")}">Online lessons</a></article>`
   : `<article class="loc"><h3><a href="${locHref(l.id)}">${l.name}</a></h3><address>${l.street}<br>${l.city}</address><p>${l.about}</p>
-    <ul class="tags"><li class="tag">${plural(teachersAt(l.id).length, "teacher", "teachers")}</li><li class="tag">Private lessons</li>${l.groupPiano ? '<li class="tag">Group piano</li>' : ""}</ul>
+    <ul class="tags"><li class="tag">Private lessons</li><li class="tag">Semi-private</li>${l.groupPiano ? '<li class="tag">Group piano</li>' : ""}</ul>
     <div class="loc-links"><a class="text-link" href="${locHref(l.id)}">Studio page</a><a class="text-link" href="${mapLink(l)}" ${ext}>Get directions</a></div></article>`;
 
 /* ---------- Animal Adventures in Music ---------- */
@@ -2398,7 +2414,8 @@ function home() {
       <p class="lede" style="max-width:480px">Performers, conductors, songwriters and longtime educators. Every teacher is FBI and DOJ background checked.</p>
     </div>
     <div class="t-wall">${(TEACHERS.some(t => t.home) ? TEACHERS.filter(t => t.home) : TEACHERS).slice(0, 12).map(tCard).join("")}</div>
-    <div class="t-foot"><a class="btn btn-primary" href="#teachers">Meet all ${TEACHERS.length} teachers</a><span class="note">Read each teacher's story and book with them directly, or filter by instrument and studio.</span></div>
+    <div class="t-foot"><a class="btn btn-primary" href="#teachers">Meet all ${TEACHERS.length} teachers</a><span class="note">Read each teacher's story and book with them directly, or filter by instrument.</span></div>
+    <div class="admin-row"><div class="stack"><p class="eyebrow">Admin team</p><h3 class="admin-title">The front desk behind every lesson</h3></div>${staffGrid(true)}</div>
   </div>
 </section>
 
@@ -2524,7 +2541,7 @@ function about() {
   <section class="section bg-tint"><div class="wrap stack-lg">
     <div class="head-row"><div class="stack"><p class="eyebrow">Front desk</p><h2 class="title">The team behind every lesson</h2></div>
       <p class="lede">They handle scheduling, billing and questions, and help match each student with the right teacher.</p></div>
-    <div class="staff-grid">${FRONT_DESK.map(s => `<div class="staff"><img src="${s.photo}" alt="Portrait of ${esc(s.name)}" width="360" height="360" loading="lazy"><div><em>${esc(s.role)}</em><br><strong>${esc(s.name)}</strong></div><span>${esc(s.about)}</span></div>`).join("")}</div>
+    ${staffGrid()}
   </div></section>
   ${band()}`;
 }
@@ -2571,9 +2588,9 @@ function programs() {
         <div class="btn-row">${trialBtn()}<a class="text-link" href="#pricing">Pricing</a></div></div>
     </div>
     <div class="cards">
-      <div class="card"><h3>Full-time online</h3><p>Private lessons with an Applause teacher from home. ${teachersAt("online").length} of our teachers offer online lessons.</p></div>
+      <div class="card"><h3>Full-time online</h3><p>Private lessons with an Applause teacher from home.</p></div>
       <div class="card"><h3>Hybrid</h3><p>Combine studio lessons with online sessions when travel or schedules get busy.</p></div>
-      <div class="card"><h3>Find an online teacher</h3><p>See every teacher who teaches online, with their instruments and booking links.</p><a class="text-link" href="${locHref("online")}">Online teachers</a></div>
+      <div class="card"><h3>Book online</h3><p>When you book a trial, choose online and the booking page shows the teachers available at your time.</p><a class="text-link" href="${LINKS.trial}" ${ext}>Book a trial lesson</a></div>
     </div>
   </div></section>
   <section class="section bg-tint" id="charter"><div class="wrap split">
@@ -2604,7 +2621,6 @@ function instruments() {
 
 function instrumentPage(id) {
   const i = INST[id]; const ts = teachersFor(id);
-  const where = LOCATIONS.filter(l => ts.some(t => t.studios.includes(l.id)));
   const formats = ["Private", "semi-private"].concat(id === "piano" ? ["group piano"] : []).join(", ");
   return `${pageHero("instrument-" + id, {
     eyebrow: `Instrument · ${ageLabel(i)}`, title: i.name, sub: i.subtitle || "",
@@ -2615,7 +2631,7 @@ function instrumentPage(id) {
   <section class="section"><div class="wrap split" style="align-items:start">
     <div class="prose"><p class="eyebrow">About ${i.name.toLowerCase()} lessons</p>${i.about.map(p => `<p class="lede">${esc(p)}</p>`).join("")}
       <div><p class="k">What you'll work on</p><ul class="creds" style="color:var(--fg)">${i.points.map(x => `<li>${x}</li>`).join("")}</ul></div></div>
-    <div class="stack">${factsDl([["Starting age", ageLabel(i)], ["Lessons", formats], ["Where", where.length ? where.map(l => `<a href="${locHref(l.id)}">${locLabel(l)}</a>`).join(" · ") : "Ask the front desk"], ["Teachers", plural(ts.length, "teacher", "teachers")], ["Pricing", `From ${P.monthly[0].price} a month · <a href="#pricing">See pricing</a>`]])}</div>
+    <div class="stack">${factsDl([["Starting age", ageLabel(i)], ["Lessons", formats], ["Where", `${STUDIOS.map(l => `<a href="${locHref(l.id)}">${l.name}</a>`).join(" · ")} · <a href="${locHref("online")}">Online</a>`], ["Teachers", plural(ts.length, "teacher", "teachers")], ["Pricing", `From ${P.monthly[0].price} a month · <a href="#pricing">See pricing</a>`]])}</div>
   </div></section>
   <section class="section bg-tint" id="teachers"><div class="wrap stack-lg">
     <div class="head-row"><div class="stack"><p class="eyebrow">Teachers</p><h2 class="title">${i.name} <em>teachers</em></h2></div>
@@ -2636,12 +2652,11 @@ function instrumentPage(id) {
 function teachers() {
   const f = FOUNDER;
   const withTeachers = INSTRUMENTS.filter(i => teachersFor(i.id).length);
-  const post = t => { const insts = teacherInst(t); const st = teacherStudios(t); const more = t.bio.length > 1 || t.credentials.length || (t.alsoTeaches || []).length; return `<article class="t-post" id="t-${t.id}" data-inst="${insts.join(" ")}" data-loc="${t.studios.join(" ")}" aria-labelledby="tn-${t.id}">
+  const post = t => { const insts = teacherInst(t); const more = t.bio.length > 1 || t.credentials.length || (t.alsoTeaches || []).length; return `<article class="t-post" id="t-${t.id}" data-inst="${insts.join(" ")}" aria-labelledby="tn-${t.id}">
     <div class="t-post-photo"><div class="frame">${tPhoto(t, 360).replace('alt=""', `alt="Portrait of ${esc(t.name)}"`)}</div></div>
     <div class="t-post-body">
       <h2 id="tn-${t.id}">${esc(t.name)}</h2>
       ${instLinks(insts)}
-      <p class="t-where"><span class="k">Studios</span>${st.length ? st.map(l => `<a href="${locHref(l.id)}">${locLabel(l)}</a>`).join("<span aria-hidden=\"true\"> · </span>") : "To be confirmed"}</p>
       <div class="t-bio"><p>${esc(t.bio[0] || "")}</p>
         ${more ? `<div class="t-more" id="tm-${t.id}" hidden>${t.bio.slice(1).map(p => `<p>${esc(p)}</p>`).join("")}
           ${(t.alsoTeaches || []).length ? `<p><span class="k" style="display:block">Also teaches</span>${esc(t.alsoTeaches.join(", "))}</p>` : ""}
@@ -2662,11 +2677,16 @@ function teachers() {
       <h2 class="title" id="dir-title">All teachers</h2>
       <div class="filters">
         <div class="filter-row" role="group" aria-label="Filter by instrument"><button class="chip-filter" type="button" data-tfilter="" aria-pressed="true">All</button>${withTeachers.map(i => `<button class="chip-filter" type="button" data-tfilter="${i.id}" aria-pressed="false">${i.name}</button>`).join("")}</div>
-        <div class="filter-row"><label for="tloc">Studio</label><select id="tloc"><option value="">All studios &amp; online</option>${LOCATIONS.map(l => `<option value="${l.id}">${locLabel(l)}</option>`).join("")}</select><span class="note" id="tcount" aria-live="polite"></span></div>
+        <div class="filter-row"><span class="note" id="tcount" aria-live="polite"></span><span class="note">Teachers work across our studios and online. When you book a trial, the booking page shows who's available at your studio and time.</span></div>
       </div>
     </div>
     <div class="t-feed" id="tfeed">${TEACHERS.map(post).join("")}</div>
-    <p class="empty" id="tempty" hidden>No teachers match those filters yet. Try another studio, or ask the front desk about availability.</p>
+    <p class="empty" id="tempty" hidden>No teachers match that instrument yet. Ask the front desk about availability.</p>
+  </div></section>
+  <section class="section" id="admin-team" aria-labelledby="admin-title"><div class="wrap stack-lg">
+    <div class="head-row"><div class="stack"><p class="eyebrow">Admin team</p><h2 class="title" id="admin-title">Our <em>front desk</em></h2></div>
+      <p class="lede" style="max-width:520px">They handle scheduling, billing and questions, and help match each student with the right teacher.</p></div>
+    ${staffGrid()}
   </div></section>
   ${band()}`;
 }
@@ -2913,8 +2933,7 @@ function locations() {
   ${band()}`;
 }
 function locationPage(id) {
-  const l = LOC[id]; const ts = teachersAt(id);
-  const insts = INSTRUMENTS.filter(i => ts.some(t => t.instruments.includes(i.id))).map(i => i.id);
+  const l = LOC[id];
   const others = LOCATIONS.filter(x => x.id !== id);
   return `${pageHero("location-" + id, {
     eyebrow: l.online ? "Locations" : "Studio", title: l.online ? "Online <em>lessons</em>" : l.name,
@@ -2925,16 +2944,16 @@ function locationPage(id) {
   <section class="section"><div class="wrap split" style="align-items:start">
     <div class="prose"><p class="eyebrow">${l.online ? "How it works" : "Visit"}</p><h2>${l.online ? "Learn from home" : "Studio details"}</h2>
       <p>${l.online ? "Learn online full time, or mix online and in-person lessons in a hybrid schedule that fits your week." : "Lessons run seven days a week; times vary by teacher. The front desk can help you find a teacher and time at this studio."}</p></div>
-    ${factsDl([].concat(l.online ? [] : [["Address", `${l.street}<br>${l.city}`]], [["Lessons", "Private, semi-private" + (l.groupPiano ? ", group piano" : "")], ["Teachers", plural(ts.length, "teacher", "teachers")], ["Call", `<a href="${telHref}">${PHONE}</a>`], ["Email", `<a href="mailto:${EMAIL}">${EMAIL}</a>`]]))}
+    ${factsDl([].concat(l.online ? [] : [["Address", `${l.street}<br>${l.city}`]], [["Lessons", "Private, semi-private" + (l.groupPiano ? ", group piano" : "")], ["Call", `<a href="${telHref}">${PHONE}</a>`], ["Email", `<a href="mailto:${EMAIL}">${EMAIL}</a>`]]))}
   </div></section>
-  <section class="section bg-tint" id="teachers"><div class="wrap stack-lg">
-    <div class="head-row"><div class="stack"><p class="eyebrow">Teachers</p><h2 class="title">${l.online ? "Online" : l.name} <em>teachers</em></h2></div>
-      <p class="lede" style="max-width:480px">Choose "Book with" to open that teacher's booking page, with the teacher already selected.</p></div>
-    ${ts.length ? `<div class="tb-grid">${ts.map(t => tbCard(t)).join("")}</div>` : `<p class="empty">Ask the front desk about current teacher availability.</p>`}
+  <section class="section bg-tint" id="teachers"><div class="wrap split" style="align-items:center">
+    <div class="stack"><p class="eyebrow">Teachers</p><h2 class="title">Find your <em>teacher</em></h2>
+      <p class="lede">Our teachers work across the studios and online, and their schedules change often. When you book a trial, the booking page shows who's available ${l.online ? "online" : "at " + l.name} at the time you choose.</p></div>
+    <div class="btn-row">${trialBtn()}<a class="btn btn-outline" href="#teachers">Meet our teachers</a></div>
   </div></section>
   <section class="section"><div class="wrap stack-lg">
-    <div class="stack"><p class="eyebrow">Instruments</p><h2 class="title">Taught ${l.online ? "online" : "at " + l.name}</h2></div>
-    ${instLinks(insts, "inst-chips lg")}
+    <div class="stack"><p class="eyebrow">Instruments</p><h2 class="title">What you can <em>learn</em></h2></div>
+    ${instLinks(INSTRUMENTS.map(i => i.id), "inst-chips lg")}
     <p class="k" style="margin-top:1rem">Other locations</p>
     <div class="btn-row">${others.map(o => `<a class="btn btn-outline btn-sm" href="${locHref(o.id)}">${o.online ? "Online lessons" : o.name}</a>`).join("")}</div>
   </div></section>
@@ -2996,6 +3015,22 @@ function contact() {
   <section class="section bg-tint"><div class="wrap"><div class="loc-grid four" style="margin-top:0">${LOCATIONS.map(locCard).join("")}</div></div></section>`;
 }
 
+/* ---------- Links page (link-in-bio for socials) ---------- */
+function linksPage() {
+  const L = LINK_PAGE;
+  const href = h => h === "trial" ? LINKS.trial : h === "portal" ? LINKS.portal : h === "reviews" ? LINKS.reviews : h;
+  const btns = L.buttons.filter(b => !b.until || D(b.until) >= today());
+  return `<section class="links-page dark"><div class="links-wrap">
+    <img class="links-logo" src="img/logo-300.webp" srcset="img/logo-300.webp 300w, img/logo-600.webp 600w" sizes="120px" width="300" height="201" alt="Applause Music Academy">
+    <h1 tabindex="-1">Applause <em>Music Academy</em></h1>
+    <p class="links-tag">${esc(L.tagline)}</p>
+    <ul class="links-list">${btns.map(b => { const u = href(b.href); const out = /^https?:/.test(u); return `<li><a class="link-btn${b.style === "trial" ? " is-trial" : ""}" href="${u}"${out ? ` ${ext}` : ""}>${esc(b.label)}</a></li>`; }).join("")}</ul>
+    <p class="links-call"><a href="${telHref}">Call ${PHONE}</a> · <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+    <p class="links-social">${L.social.map(([n, k]) => `<a href="${LINKS[k]}" ${ext}>${n}</a>`).join("")}</p>
+    <p class="links-home"><a href="#home">Visit our website</a></p>
+  </div></section>`;
+}
+
 /* ---------- Thank-you pages ---------- */
 function thanks(key) {
   const t = THANKS[key];
@@ -3040,9 +3075,9 @@ function buildChrome() {
 const navMatch = (n, page) => n.match.some(m => m.endsWith("-") ? page.startsWith(m) : page === m);
 
 /* ---------- Routing ---------- */
-const VIEWS = { home, about, programs, "animal-adventures": animalAdventures, instruments, teachers, "student-life": studentLife, pricing, charter, calendar: calendarPage, recital, program, locations, faq: faqPage, join, contact };
-const TITLES = { about: "About Us", programs: "Programs", "animal-adventures": "Animal Adventures in Music", instruments: "Instruments", teachers: "Meet our teachers", "student-life": "Student life", pricing: "Pricing", charter: "Charter students", calendar: "Academy calendar", recital: "Recital", program: "Recital programs", locations: "Locations", faq: "FAQ", join: "Join our team", contact: "Contact us" };
-const ALIASES = { animaladventuresinmusic: "animal-adventures", tuition: "pricing", prices: "pricing", "charter-students": "charter", "meet-our-teachers": "teachers" };
+const VIEWS = { home, about, programs, "animal-adventures": animalAdventures, instruments, teachers, "student-life": studentLife, pricing, charter, calendar: calendarPage, recital, program, locations, faq: faqPage, join, contact, links: linksPage };
+const TITLES = { about: "About Us", programs: "Programs", "animal-adventures": "Animal Adventures in Music", instruments: "Instruments", teachers: "Meet our teachers", "student-life": "Student life", pricing: "Pricing", charter: "Charter students", calendar: "Academy calendar", recital: "Recital", program: "Recital programs", locations: "Locations", faq: "FAQ", join: "Join our team", contact: "Contact us", links: "Links" };
+const ALIASES = { animaladventuresinmusic: "animal-adventures", tuition: "pricing", prices: "pricing", "charter-students": "charter", "meet-our-teachers": "teachers", linktree: "links", "link-in-bio": "links" };
 function resolve(page) {
   page = ALIASES[page] || page;
   if (VIEWS[page]) return { page, view: VIEWS[page], title: TITLES[page] };
@@ -3065,6 +3100,7 @@ function route() {
     if (changing) {
       main.innerHTML = r.view();
       main.dataset.page = r.page;
+      document.body.classList.toggle("is-links", r.page === "links");
       bind(main, r.page);
     }
     if (!sec) window.scrollTo(0, 0);
@@ -3105,11 +3141,11 @@ function drawCalendar() {
 function bind(root, page) {
   if (page === "teachers") {
     let filter = "";
-    const loc = $("#tloc", root), count = $("#tcount", root), empty = $("#tempty", root), posts = $$(".t-post", root);
+    const count = $("#tcount", root), empty = $("#tempty", root), posts = $$(".t-post", root);
     const draw = () => {
       let n = 0;
       posts.forEach(p => {
-        const ok = (!filter || p.dataset.inst.split(" ").includes(filter)) && (!loc.value || p.dataset.loc.split(" ").includes(loc.value));
+        const ok = !filter || p.dataset.inst.split(" ").includes(filter);
         p.hidden = !ok; if (ok) n++;
       });
       empty.hidden = n > 0;
@@ -3120,8 +3156,7 @@ function bind(root, page) {
       $$("[data-tfilter]", root).forEach(x => x.setAttribute("aria-pressed", x === b));
       draw();
     }));
-    loc.addEventListener("change", draw);
-    resetTeacherFilters = () => { filter = ""; loc.value = ""; $$("[data-tfilter]", root).forEach((x, i) => x.setAttribute("aria-pressed", i === 0)); draw(); };
+    resetTeacherFilters = () => { filter = ""; $$("[data-tfilter]", root).forEach((x, i) => x.setAttribute("aria-pressed", i === 0)); draw(); };
     draw();
   }
   if (page === "calendar") {
