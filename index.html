@@ -1187,8 +1187,9 @@ const OPUS1_CHAT_CONFIG = null;
      booking      that teacher's Opus1 self-booking link (opens with the teacher already selected)
      bio          one or more paragraphs
      credentials  degrees and training (optional)
-   To REMOVE a teacher: delete their block. The first 12 teachers in this list
-   appear on the home page; move a block up or down to change the order. */
+   To REMOVE a teacher: delete their block.
+   home: true puts a teacher on the home page "Meet the teachers" wall (12 at most;
+   Jerry chose these on Nov 19). The Teachers page lists everyone in this order. */
 const TEACHERS = [
   {
     id: "mr-aaron", name: "Mr. Aaron",
@@ -1227,7 +1228,7 @@ const TEACHERS = [
     credentials: ["AA in General Music — Norco College", "Pursuing BM in Classical Guitar Performance — CSU San Bernardino"]
   },
   {
-    id: "ms-gabby", name: "Ms. Gabby",
+    id: "ms-gabby", name: "Ms. Gabby", home: true,
     photo: "img/staff/ms-gabby-360.webp",
     instruments: ["piano", "voice"],
     studios: ["upland"],
@@ -1276,7 +1277,7 @@ const TEACHERS = [
     credentials: ["BA in Violin Performance", "Master’s in Music Education"]
   },
   {
-    id: "tony", name: "Mr. Tony",
+    id: "tony", name: "Mr. Tony", home: true,
     photo: "img/staff/tony-360.webp",
     instruments: ["piano", "viola", "violin"],
     studios: ["glendora", "online", "rancho-cucamonga"],
@@ -1324,7 +1325,7 @@ const TEACHERS = [
     credentials: ["BA in Violin Performance and Chamber Music Studies", "MTAC member and string adjudicator"]
   },
   {
-    id: "james", name: "Mr. James",
+    id: "james", name: "Mr. James", home: true,
     photo: "img/staff/james-360.webp",
     instruments: ["cello"],
     studios: ["glendora", "rancho-cucamonga"],
@@ -1336,7 +1337,7 @@ const TEACHERS = [
     credentials: ["Music Performance major; pursuing advanced cello performance studies"]
   },
   {
-    id: "paige", name: "Ms. Paige",
+    id: "paige", name: "Ms. Paige", home: true,
     photo: "img/staff/paige-360.webp",
     instruments: ["clarinet", "flute", "saxophone"],
     studios: ["online", "rancho-cucamonga", "upland"],
@@ -1348,7 +1349,7 @@ const TEACHERS = [
     credentials: ["BA in Flute Performance"]
   },
   {
-    id: "joshua", name: "Mr. Joshua",
+    id: "joshua", name: "Mr. Joshua", home: true,
     photo: "img/staff/joshua-360.webp",
     instruments: ["piano", "voice"],
     studios: ["glendora", "online", "rancho-cucamonga"],
@@ -1360,7 +1361,7 @@ const TEACHERS = [
     credentials: ["BA in Vocal Performance", "Pursuing Master’s in Vocal Performance"]
   },
   {
-    id: "kimberly", name: "Ms. Kimberly",
+    id: "kimberly", name: "Ms. Kimberly", home: true,
     photo: "img/staff/kimberly-360.webp",
     instruments: ["piano", "voice"],
     studios: ["online", "rancho-cucamonga"],
@@ -1384,7 +1385,7 @@ const TEACHERS = [
     credentials: ["Master’s in Conducting", "Suzuki Early Childhood Education (SECE)", "Suzuki Violin/Viola Teacher Training", "Suzuki Enrichment Courses: Teaching Strategies and Collective Practices", "Suzuki Methodology Philosophy Course"]
   },
   {
-    id: "anthony", name: "Mr. Anthony",
+    id: "anthony", name: "Mr. Anthony", home: true,
     photo: "img/staff/anthony-360.webp",
     instruments: ["clarinet", "drums", "piano", "trombone", "trumpet"],
     studios: ["online", "rancho-cucamonga"],
@@ -1396,7 +1397,7 @@ const TEACHERS = [
     credentials: ["4 years of teaching experience and 19 years of performance experience"]
   },
   {
-    id: "justyna", name: "Dr. Justyna",
+    id: "justyna", name: "Dr. Justyna", home: true,
     photo: "img/staff/justyna-360.webp",
     instruments: ["piano"],
     studios: ["glendora"],
@@ -1420,7 +1421,7 @@ const TEACHERS = [
     credentials: ["BA in Music"]
   },
   {
-    id: "abi", name: "Ms. Abi",
+    id: "abi", name: "Ms. Abi", home: true,
     photo: "img/staff/abi-360.webp",
     instruments: ["piano", "violin"],
     studios: ["glendora", "online"],
@@ -1432,7 +1433,7 @@ const TEACHERS = [
     credentials: ["Violin Performance major"]
   },
   {
-    id: "jonah", name: "Mr. Jonah",
+    id: "jonah", name: "Mr. Jonah", home: true,
     photo: "img/staff/jonah-360.webp",
     instruments: ["guitar", "bass-guitar", "drums", "piano", "voice", "saxophone", "composition"],
     studios: ["glendora", "online", "rancho-cucamonga"],
@@ -1468,7 +1469,7 @@ const TEACHERS = [
     credentials: []
   },
   {
-    id: "victoria", name: "Ms. Victoria",
+    id: "victoria", name: "Ms. Victoria", home: true,
     photo: "img/staff/victoria-360.webp",
     instruments: ["viola", "violin"],
     studios: ["glendora", "online", "rancho-cucamonga"],
@@ -1492,7 +1493,7 @@ const TEACHERS = [
     credentials: ["BA in Music"]
   },
   {
-    id: "ms-sage", name: "Ms. Sage",
+    id: "ms-sage", name: "Ms. Sage", home: true,
     photo: "img/staff/sage-360.webp",
     instruments: ["voice", "piano"],
     studios: [],
@@ -1916,30 +1917,51 @@ const ANIMAL_ADVENTURES = {
 };
 
 /* ---------- 9. FAQ ----------
-   The Pricing group is built from section 5, so prices stay in step. */
+   Applause's own questions and answers (Jerry, Nov 19 "FAQ for the website").
+   The member benefits question is added at the top of Tuition & Enrollment from MEMBER_BENEFITS.
+   Links in answers: @TRIAL@, @LOGIN@ and @POLICY@ are filled in from LINKS. */
 const FAQ = [
-  { id: "start", name: "Getting started", items: [
-    ["What ages and experience levels do you teach?", "Beginners, returning musicians and experienced students are all welcome, including adults. Recommended starting ages are listed on each instrument page: most begin around four, and violin and viola around six, while woodwinds, brass and cello are better suited to ages seven and up. We’ll help you choose a comfortable starting point."],
-    ["What happens at a trial lesson?", "You’ll meet a teacher, try the instrument and talk about your interests. The teacher may introduce a few foundational exercises, lesson materials and a starting plan."],
-    ["Do we need an instrument for a trial?", "The academy can provide most instruments for a trial lesson. Let the team know what you need in advance so they can prepare for your visit."],
-    ["Do you teach preschoolers?", "Yes. Animal Adventures in Music is our one-to-one program for ages 2.5 to 5, with games, stories and ten instruments to explore. See the Animal Adventures page for details."],
-    ["Can adults take lessons?", "Absolutely. Start a new instrument, return to one you once loved, or work toward a personal musical goal. Private lessons are tailored to your experience and interests."],
-    ["What styles of music can we learn?", "Teachers work across classical, pop, rock, jazz, musical theater, worship, film music and more. Share the music you enjoy and we’ll suggest a teacher."]
+  { id: "start", name: "Getting Started", items: [
+    ["What makes Applause Music Academy different from other music schools?", "At Applause Music Academy, music education goes beyond weekly lessons. We combine personalized instruction with performance opportunities, exam and competition preparation, interactive practice tools, and rewarding achievement programs. Our goal is to help every student develop musical skills, confidence, discipline, and a lifelong love of music."],
+    ["What ages do you teach?", "We welcome children, teens, and adults of all skill levels! Our <a href=\"#animal-adventures\">Animal Adventures</a> music discovery program introduces children as young as 2½ to music, while most traditional instrument lessons begin around age 4. Some instruments, such as cello and woodwinds, may be better suited for slightly older beginners."],
+    ["How do I get started?", "The best way to begin is with a trial lesson! Choose your instrument, preferred location, teacher, and available time through our <a href=\"@TRIAL@\" target=\"_blank\" rel=\"noopener\">online booking system</a>. It's a great opportunity to meet your teacher, explore the instrument, and see if our academy is the right fit."],
+    ["Do I need my own instrument to start?", "Not necessarily! We have instruments available for most trial lessons. If you decide to continue, our team can help you choose an instrument that fits your needs and budget. Please let us know in advance if you need to borrow an instrument for your trial."],
+    ["Do you offer lessons for complete beginners?", "Absolutely! No previous musical experience is necessary. Whether you're a young child exploring music for the first time or an adult pursuing a lifelong interest, our teachers will guide you at a pace that's comfortable and rewarding."],
+    ["Where are you located? Do you offer online lessons?", "We offer in-person lessons at our <a href=\"#locations\">Glendora, Upland, and Rancho Cucamonga locations</a>, as well as online lessons. Hybrid arrangements are also available for students who need additional flexibility."],
+    ["What if my child is shy, nervous, or has difficulty focusing?", "Every child learns differently, and that's perfectly okay! Our teachers tailor their approach to each student's personality, learning style, and comfort level. We focus on building trust, confidence, and positive learning experiences while encouraging steady musical growth."]
   ]},
-  { id: "pricing", name: "Pricing", pricing: true },
-  { id: "lessons", name: "Your lessons", items: [
-    ["Can I take lessons online?", "Yes. In-person, online and hybrid arrangements are available. Ask which options suit your instrument and schedule."],
-    ["Can parents observe a lesson?", "Yes. Parents may quietly observe in the lesson room or through the observation window, depending on what best supports the student."],
-    ["Can students change instruments?", "Yes. Contact the front desk to discuss another instrument and arrange a suitable teacher and schedule."],
-    ["Will we need books or materials?", "Your teacher will recommend any required books. You can buy them through the academy or from your preferred retailer. Materials and outside activities may carry additional fees."],
-    ["Will students have opportunities to perform?", "Yes. Students perform throughout the year, including two formal recitals. Dates are on the academy calendar."]
+  { id: "lessons", name: "Lessons & Learning", items: [
+    ["What types of music lessons do you offer?", "We offer personalized private lessons, semi-private lessons for two students, and select group classes. Students can attend lessons once, twice, or even three times per week, depending on their goals and interests. More frequent lessons help build consistency, strengthen discipline, and accelerate musical progress. We also offer discounted rates for additional weekly lessons, making it even more rewarding to learn more! Lesson options vary by instrument and location."],
+    ["How long are your lessons?", "Private lessons are available in 30, 45, and 60-minute sessions. The best duration depends on the student's age, experience, attention span, and musical goals. Our team can help you choose the right starting point."],
+    ["How long does it take to learn an instrument?", "Every student progresses differently! Many beginners can play simple songs within their first few weeks. With regular lessons and consistent practice, students often develop a solid musical foundation within 3–6 months. Our focus is on steady progress, confidence, and enjoying the learning process."],
+    ["How much should my child practice between lessons?", "Consistent practice is key to musical progress! We encourage students to practice regularly, even if it's just a few minutes each day. Through our PracticeSpace app, students can track their practice, stay motivated, and communicate with their teachers between lessons. To make practicing even more exciting, we offer multiple reward programs that recognize students for their dedication, consistency, and achievements. Our goal is to make practicing fun, rewarding, and a natural part of every student's musical journey!"],
+    ["Can I switch instruments or teachers?", "Of course! Musical interests and learning needs can change over time. Whether you'd like to explore a different instrument or find a teacher whose approach better suits you, our front desk team will be happy to help."],
+    ["What music styles do you teach?", "Our teachers cover a wide variety of styles, including classical, pop, rock, jazz, musical theatre, and contemporary music. Lessons are tailored to each student's interests while building essential musical skills."],
+    ["Do you offer music exams and competition preparation?", "Absolutely! At Applause Music Academy, we help students take their musical achievements to the next level through specialized exam and competition preparation. Our experienced instructors prepare students for recognized music examinations, including Certificate of Merit (CM), ABRSM, Royal Conservatory of Music (RCM), and Piano Adventures Exams, as well as local and regional music competitions. Whether your goal is to earn a music certificate, advance through graded levels, or compete, we provide personalized guidance to help you prepare with confidence and achieve your goals."],
+    ["Are your teachers qualified?", "Yes! Our instructors are carefully selected for their musical expertise, teaching experience, and ability to connect with students. Our teachers have strong music education backgrounds and complete FBI and DOJ background checks clearance, so families can feel confident in their learning environment."]
   ]},
-  { id: "membership", name: "Membership & scheduling", items: [
-    ["Is there a long-term contract?", "Membership is month to month. To end at the close of the current month, notify the academy by the 15th; later requests continue through the following month. Please review the full academy policy before enrolling."],
-    ["How is tuition paid?", "Tuition is paid automatically by major credit card or ACH. Monthly payments are processed ten days before the month begins."],
-    ["Is the studio ever closed?", "Yes. The academy calendar shows blocked-out days, when there are no lessons or credit. Weekly members receive 46 lessons per calendar year."]
+  { id: "scheduling", name: "Scheduling & Attendance", items: [
+    ["Do you offer make-up lessons?", "Yes. You’ll be able to cancel and reschedule your private lessons through our online <a href=\"@LOGIN@\" target=\"_blank\" rel=\"noopener\">student portal</a> without even having to contact us. If you prefer, we are happy to reschedule lessons for you as well."],
+    ["How do make-up lessons work?", "Eligible make-up credits can be used to schedule another available lesson with your teacher or a different instructor. Credits can also be used to explore another instrument."],
+    ["Can I attend my lesson online if I can't come in person?", "Yes! If you're unable to attend in person, you may request an online lesson instead. Please contact our front desk or submit your request through the student portal so we can help arrange it."],
+    ["Are you open year-round?", "Yes! Applause Music Academy operates year-round, including summer. Our annual lesson calendar accounts for scheduled academy closures and holidays, making it easy for families to plan ahead. See the <a href=\"#calendar\">academy calendar</a>."]
+  ]},
+  { id: "tuition", name: "Tuition & Enrollment", items: [
+    ["How much do music lessons cost?", "Tuition depends on the lesson format and duration. We offer monthly memberships for weekly lessons, along with prepaid lesson packages for students seeking a different arrangement. Visit our <a href=\"#pricing\">Pricing page</a> for current rates and enrollment information."],
+    ["Is there a long-term commitment?", "No! Our memberships are month-to-month, with no long-term contract required. If you decide to discontinue lessons, simply notify our office by the 15th of the month to end your membership at the end of that month."],
+    ["How does monthly tuition work?", "Our tuition is based on an annual lesson schedule and divided into 12 equal monthly installments for convenient, predictable payments. This means your monthly tuition remains the same whether a particular month has three, four, or five scheduled lessons. Holidays and planned closures are already accounted for in our annual academy calendar. Payments are collected automatically by credit card, ACH or Zelle payments."],
+    ["Do you accept charter school funds?", "Yes! We proudly partner with charter schools to make music education accessible to more families. Visit our <a href=\"#charter\">Charter Students page</a> to see participating schools and learn how to get started with your educational funds."],
+    ["What is your cancellation and refund policy?", "Trial lesson purchases and membership tuition are non-refundable. We understand that plans can change, so our team is happy to explain available rescheduling options and help you manage your membership according to our <a href=\"@POLICY@\" target=\"_blank\" rel=\"noopener\">Academy Policy</a>."]
+  ]},
+  { id: "progress", name: "Student Progress & Achievements", items: [
+    ["Can parents observe their child's lesson?", "Absolutely! Parents are welcome to observe from inside the lesson room or through our observation windows. Some children learn best with a parent nearby, while others focus better independently. We encourage whichever arrangement best supports the student's learning."],
+    ["Do students have opportunities to perform?", "Yes! We host two formal recitals each year, along with additional showcases and community performances. These events help students build confidence, celebrate achievements, and share their musical progress with family and friends."],
+    ["How does Applause keep students motivated to practice?", "We make practicing fun and rewarding! Through PracticeSpace, students can track their practice, communicate with their teachers between lessons, and stay engaged throughout the week. Our multiple reward programs celebrate consistent effort, dedication, and musical achievements."],
+    ["How do you track and celebrate student progress?", "We believe every achievement deserves recognition! Our teachers monitor each student's progress and help set meaningful learning goals. Through practice rewards, recitals, music examinations, and other achievement opportunities, students can see how far they've come and stay motivated for their next milestone."],
+    ["Do students need to purchase books or materials?", "Most students will need lesson books or other learning materials recommended by their teacher. You're welcome to purchase them through our academy or from another retailer. Your instructor will guide you toward the appropriate materials for your level."]
   ]}
 ];
+const FAQ_CLOSING = { title: "Still Have Questions? We're Here to Help!", text: "Our friendly team is happy to help you find the right instrument, teacher, and lesson schedule. Your musical journey starts with just one lesson!" };
 
 /* ---------- 10. THANK-YOU PAGES ---------- */
 const THANKS = {
@@ -2053,7 +2075,7 @@ const JOIN = [
 ];
 
 const NOTES = [
-  ["New in version 9", "Only Applause's own photos: the instrument tiles, semi-private, online and Join Our Team photos now use the original photoshoot images with their colorful walls and a light touch-up. Viola, bass guitar, trombone and composition are listed under More instruments until photos are taken. Trial buttons are Applause blue. Animal Adventures tuition is on the Pricing page, and the monthly plan benefits say they apply to the monthly payment plan only. Menus are in title case and no longer list Recitals or Recital programs. Mr. Alex, Mr. Julian and Kymora are added, and Ms. Sage and Ms. Tiana have their photos. The Calendar page has the printable 2026 and 2027 calendars and the 2027 closures. The Contact page uses the Opus1 lead form. From Jerry (Nov 18): a \"Why families join us\" member benefits section on the home page, the same benefits on the Pricing page, About Us and in the FAQ, \"Call\" instead of \"Call or text\" everywhere, and the crossed-out pricing and FAQ lines removed. The Membership & scheduling FAQ will be rewritten with Applause's own content."],
+  ["New in version 9", "Only Applause's own photos: the instrument tiles, semi-private, online and Join Our Team photos now use the original photoshoot images with their colorful walls and a light touch-up. Viola, bass guitar, trombone and composition are listed under More instruments until photos are taken. Trial buttons are Applause blue. Animal Adventures tuition is on the Pricing page, and the monthly plan benefits say they apply to the monthly payment plan only. Menus are in title case and no longer list Recitals or Recital programs. Mr. Alex, Mr. Julian and Kymora are added, and Ms. Sage and Ms. Tiana have their photos. The Calendar page has the printable 2026 and 2027 calendars and the 2027 closures. The Contact page uses the Opus1 lead form. From Jerry (Nov 18): a \"Why families join us\" member benefits section on the home page, the same benefits on the Pricing page, About Us and in the FAQ, \"Call\" instead of \"Call or text\" everywhere, and the crossed-out pricing and FAQ lines removed. The FAQ is now Applause's own content (Jerry, Nov 19), the home page shows the 12 teachers Jerry picked, and the front desk photo was brightened (lighting matched to a Higgsfield relight; people and details are the original photo)."],
   ["Animal Adventures", "The program copy is the example text Animal Adventures in Music provides to member studios. Applause enrolls ages 2.5 to 5. Tuition ($162 a month for weekly 30-minute lessons) is from the current pricing page. The official logo and the 10-books graphic go where the text lockup sits now."],
   ["One place to edit", "Teachers, front desk staff, instruments, studios, prices, calendar events, calendar images, the recital, charter information and FAQ all come from one content file (data.js), laid out the way the WordPress screens will be. Adding or removing a teacher there updates the Teachers page, every instrument and studio page, and the home page."],
   ["Book with a teacher", "Each teacher's \"Book with\" button opens that teacher's own Opus1 booking link from the current website, so the teacher is already selected. Nothing is booked from this preview."],
@@ -2141,7 +2163,9 @@ function pricingFaq() {
 }
 const benefitsList = (cls = "checks benefits") => `<ul class="${cls}">${MEMBER_BENEFITS.map(b => `<li>${esc(b)}</li>`).join("")}</ul>`;
 const benefitsFaq = () => ["What are the member benefits?", `Weekly members on the monthly payment plan get:${benefitsList("checks benefits in-faq")}`];
-const faqGroups = () => FAQ.map(g => g.pricing ? { ...g, items: pricingFaq() } : g.id === "membership" ? { ...g, items: [benefitsFaq(), ...g.items] } : g);
+const faqLinks = a => a.replace(/@TRIAL@/g, LINKS.trial).replace(/@LOGIN@/g, LINKS.portal).replace(/@POLICY@/g, LINKS.policy);
+const faqGroups = () => FAQ.map(g => ({ ...g, items: (g.id === "tuition" ? [benefitsFaq(), ...g.items] : g.items).map(([q, a]) => [q, faqLinks(a)]) }));
+const faqFind = q => faqGroups().flatMap(g => g.items).find(x => x[0] === q);
 
 /* ---------- Shared blocks ---------- */
 function pageHero(page, { eyebrow, title, intro, img, figure, jump, buttons, sub }) {
@@ -2286,7 +2310,7 @@ const playChip = i => `<li><a class="play-chip${i.photo ? " has-photo" : ""}" hr
 function home() {
   const pwItem = (p, dup) => `<li class="pw-item${dup ? " dup" : ""}"${dup ? ' aria-hidden="true"' : ""}><div class="pw-logo"><img src="img/pathways/${p.slug}.webp" alt="" width="240" height="240" loading="lazy"></div><span class="pw-name">${p.name}</span></li>`;
   const row = n => INSTRUMENTS.filter(i => i.row === n);
-  const faqPick = [FAQ[0].items[0], FAQ[0].items[1], pricingFaq()[0], FAQ.find(g => g.id === "membership").items[0], FAQ[0].items[2]];
+  const faqPick = ["How do I get started?", "What ages do you teach?", "Do I need my own instrument to start?", "How much do music lessons cost?", "Is there a long-term commitment?"].map(faqFind).filter(Boolean);
   return `
 <section class="hero dark" aria-labelledby="hero-title">
   <div class="hero-media"><picture>
@@ -2373,7 +2397,7 @@ function home() {
       <div class="stack"><p class="eyebrow">Faculty</p><h2 class="title" id="t-title">Meet the <em>teachers</em></h2></div>
       <p class="lede" style="max-width:480px">Performers, conductors, songwriters and longtime educators. Every teacher is FBI and DOJ background checked.</p>
     </div>
-    <div class="t-wall">${TEACHERS.slice(0, 12).map(tCard).join("")}</div>
+    <div class="t-wall">${(TEACHERS.some(t => t.home) ? TEACHERS.filter(t => t.home) : TEACHERS).slice(0, 12).map(tCard).join("")}</div>
     <div class="t-foot"><a class="btn btn-primary" href="#teachers">Meet all ${TEACHERS.length} teachers</a><span class="note">Read each teacher's story and book with them directly, or filter by instrument and studio.</span></div>
   </div>
 </section>
@@ -2381,7 +2405,7 @@ function home() {
 <section class="section light" id="approach" aria-labelledby="about-title">
   <div class="wrap">
     <div class="approach">
-      <div><figure>${pic("shoot/front-desk", [640, 1024, 1600], "(min-width: 900px) 52vw, 100vw", "The Applause front desk, with the logo on a magenta wall above shelves of student trophies", { pos: "55% 50%" })}</figure>
+      <div><figure>${pic("shoot/front-desk-bright", [640, 1024, 1600], "(min-width: 900px) 52vw, 100vw", "The Applause front desk, with the logo on a magenta wall above shelves of student trophies", { pos: "55% 50%" })}</figure>
         <p class="cap">The front desk, with student trophies on the wall behind it.</p></div>
       <div class="stack-lg">
         <div class="stack"><p class="eyebrow">Our approach</p><h2 class="title" id="about-title">Personal teaching, <em>close to home</em></h2>
@@ -2475,7 +2499,7 @@ function about() {
   return `${pageHero("about", {
     eyebrow: "About Us", title: "Personal music education, <em>close to home</em>",
     intro: "Applause Music Academy opened in Glendora in 2018. Today our teachers work with students of every age and level in Glendora, Rancho Cucamonga, Upland and online.",
-    img: { name: "shoot/front-desk-2", w: [640, 1024, 1600], alt: "The Applause front desk, with the logo on a magenta wall above shelves of student trophies" },
+    img: { name: "shoot/front-desk-2-bright", w: [640, 1024, 1600], alt: "The Applause front desk, with the logo on a magenta wall above shelves of student trophies" },
     buttons: trialBtn() + `<a class="btn btn-outline" href="#teachers">Meet the teachers</a>`
   })}
   <section class="section"><div class="wrap split">
@@ -2923,11 +2947,11 @@ function faqPage() {
   return `${pageHero("faq", {
     eyebrow: "FAQ", title: "Questions, <em>answered</em>",
     intro: `Still wondering about something? Call <span class="nw">${PHONE}</span>, email ${EMAIL}, or open the chat.`,
-    jump: groups.map(g => [g.id, g.name]).concat([["charter", "Charter students"]])
+    jump: groups.map(g => [g.id, g.name])
   })}
   <section class="section"><div class="wrap" style="max-width:900px">
-    ${groups.map(g => `<div class="faq-group" id="${g.id}"><h2>${g.name}</h2><div class="faq" style="margin-top:1rem">${g.items.map(faqItem).join("")}</div>${g.pricing ? `<div class="btn-row" style="margin-top:1.2rem"><a class="btn btn-outline btn-sm" href="#pricing">Full pricing</a></div>` : ""}</div>`).join("")}
-    <div class="faq-group" id="charter"><h2>Charter students</h2><div class="faq" style="margin-top:1rem">${CHARTER.faqs.map(faqItem).join("")}</div><div class="btn-row" style="margin-top:1.2rem"><a class="btn btn-outline btn-sm" href="#charter">Charter students</a></div></div>
+    ${groups.map(g => `<div class="faq-group" id="${g.id}"><h2>${g.name}</h2><div class="faq" style="margin-top:1rem">${g.items.map(faqItem).join("")}</div></div>`).join("")}
+    <div class="faq-group faq-closing"><h2>${esc(FAQ_CLOSING.title)}</h2><p class="lede">${esc(FAQ_CLOSING.text)}</p><div class="btn-row" style="margin-top:1.2rem"><a class="btn btn-primary" href="#contact">Contact us</a>${trialBtn()}</div></div>
   </div></section>
   ${band()}`;
 }
