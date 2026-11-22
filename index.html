@@ -680,11 +680,6 @@ dialog::backdrop{background:rgba(18,5,13,.7);-webkit-backdrop-filter:blur(4px);b
 .i-body h2 a:hover{color:var(--accent)}
 .i-sub{font-size:.88rem;color:var(--fg-3);font-weight:600}
 .tagline{font-family:var(--font-accent);font-style:italic;font-weight:600;color:var(--accent);font-size:1.3rem;line-height:1.25}
-.i-teach{display:flex;align-items:center;gap:.75rem;margin-top:.25rem}
-.i-teach .k{margin:0}
-.i-faces{display:flex;padding-left:8px}
-.i-faces .f{width:32px;height:32px;margin-left:-8px;border-radius:50%;overflow:hidden;border:2px solid var(--card);background:var(--tile)}
-.i-faces img{width:100%;height:100%;object-fit:cover}
 .i-body .btn-row{margin-top:auto;padding-top:.75rem}
 .inst-chips{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
 .inst-chips a{display:inline-flex;align-items:center;min-height:34px;padding:.2rem .85rem;border:1.5px solid var(--line-2);border-radius:999px;color:var(--fg);font-size:.86rem;font-weight:700;text-decoration:none;transition:border-color .2s,color .2s,background-color .2s}
@@ -2318,10 +2313,10 @@ function animalAdventures() {
 }
 
 /* ---------- Home ---------- */
-const playTile = i => { const n = teachersFor(i.id).length; return `<li><a class="play-tile" href="${instHref(i.id)}">
+const playTile = i => `<li><a class="play-tile" href="${instHref(i.id)}">
   <span class="pt-photo">${pic(i.photo.img, i.photo.w, "(min-width: 1100px) 19vw, (min-width: 700px) 30vw, 50vw", i.photo.alt, { pos: i.photo.pos })}</span>
-  <span class="pt-body"><strong>${i.name}</strong><span>${ageLabel(i)} · ${plural(n, "teacher", "teachers")}</span></span></a></li>`; };
-const playChip = i => `<li><a class="play-chip${i.photo ? " has-photo" : ""}" href="${instHref(i.id)}">${i.photo ? `<span class="pt-photo">${pic(i.photo.img, i.photo.w.slice(0, 1), "(min-width: 1100px) 15vw, (min-width: 700px) 30vw, 50vw", i.photo.alt, { pos: i.photo.pos })}</span>` : ""}<span class="pc-body"><strong>${i.name}</strong><span>${ageLabel(i)} · ${plural(teachersFor(i.id).length, "teacher", "teachers")}</span></span></a></li>`;
+  <span class="pt-body"><strong>${i.name}</strong><span>${ageLabel(i)}</span></span></a></li>`;
+const playChip = i => `<li><a class="play-chip${i.photo ? " has-photo" : ""}" href="${instHref(i.id)}">${i.photo ? `<span class="pt-photo">${pic(i.photo.img, i.photo.w.slice(0, 1), "(min-width: 1100px) 15vw, (min-width: 700px) 30vw, 50vw", i.photo.alt, { pos: i.photo.pos })}</span>` : ""}<span class="pc-body"><strong>${i.name}</strong><span>${ageLabel(i)}</span></span></a></li>`;
 
 function home() {
   const pwItem = (p, dup) => `<li class="pw-item${dup ? " dup" : ""}"${dup ? ' aria-hidden="true"' : ""}><div class="pw-logo"><img src="img/pathways/${p.slug}.webp" alt="" width="240" height="240" loading="lazy"></div><span class="pw-name">${p.name}</span></li>`;
@@ -2604,11 +2599,10 @@ function programs() {
 
 /* ---------- Instruments ---------- */
 function instruments() {
-  const tile = i => { const ts = teachersFor(i.id); return `<article class="i-card${i.photo ? " has-photo" : ""}">
+  const tile = i => `<article class="i-card${i.photo ? " has-photo" : ""}">
     ${i.photo ? `<a class="i-photo" href="${instHref(i.id)}" tabindex="-1" aria-hidden="true"${i.photo.ratio ? ` style="aspect-ratio:${i.photo.ratio}"` : ""}>${pic(i.photo.img, i.photo.w.slice(0, 2), "(min-width: 1100px) 30vw, (min-width: 700px) 45vw, 100vw", "", { pos: i.photo.pos })}</a>` : `<a class="i-photo type" href="${instHref(i.id)}" tabindex="-1" aria-hidden="true"><span>${i.name}</span></a>`}
     <div class="i-body"><p class="i-age">${ageLabel(i)}</p><h2><a href="${instHref(i.id)}">${i.name}</a></h2>${i.subtitle ? `<p class="i-sub">${i.subtitle}</p>` : ""}<p class="tagline">${i.tagline}</p>
-      <div class="i-teach"><span class="k">${plural(ts.length, "teacher", "teachers")}</span>${ts.length ? `<span class="i-faces">${ts.slice(0, 6).map(t => `<span class="f">${t.photo ? `<img src="${t.photo}" alt="" width="32" height="32" loading="lazy">` : `<span class="mono sm">${esc(monogram(t))}</span>`}</span>`).join("")}</span>` : ""}</div>
-      <div class="btn-row"><a class="btn btn-primary btn-sm" href="${instHref(i.id)}">${i.name} lessons</a></div></div></article>`; };
+      <div class="btn-row"><a class="btn btn-primary btn-sm" href="${instHref(i.id)}">${i.name} lessons</a></div></div></article>`;
   return `${pageHero("instruments", {
     eyebrow: "Instruments", title: "What will you <em>play?</em>",
     intro: "Private lessons for every instrument below, in a studio or online. Open an instrument to see the recommended age, common questions and the teachers who teach it."
@@ -2631,7 +2625,7 @@ function instrumentPage(id) {
   <section class="section"><div class="wrap split" style="align-items:start">
     <div class="prose"><p class="eyebrow">About ${i.name.toLowerCase()} lessons</p>${i.about.map(p => `<p class="lede">${esc(p)}</p>`).join("")}
       <div><p class="k">What you'll work on</p><ul class="creds" style="color:var(--fg)">${i.points.map(x => `<li>${x}</li>`).join("")}</ul></div></div>
-    <div class="stack">${factsDl([["Starting age", ageLabel(i)], ["Lessons", formats], ["Where", `${STUDIOS.map(l => `<a href="${locHref(l.id)}">${l.name}</a>`).join(" · ")} · <a href="${locHref("online")}">Online</a>`], ["Teachers", plural(ts.length, "teacher", "teachers")], ["Pricing", `From ${P.monthly[0].price} a month · <a href="#pricing">See pricing</a>`]])}</div>
+    <div class="stack">${factsDl([["Starting age", ageLabel(i)], ["Lessons", formats], ["Where", `${STUDIOS.map(l => `<a href="${locHref(l.id)}">${l.name}</a>`).join(" · ")} · <a href="${locHref("online")}">Online</a>`], ["Pricing", `From ${P.monthly[0].price} a month · <a href="#pricing">See pricing</a>`]])}</div>
   </div></section>
   <section class="section bg-tint" id="teachers"><div class="wrap stack-lg">
     <div class="head-row"><div class="stack"><p class="eyebrow">Teachers</p><h2 class="title">${i.name} <em>teachers</em></h2></div>
@@ -2677,7 +2671,7 @@ function teachers() {
       <h2 class="title" id="dir-title">All teachers</h2>
       <div class="filters">
         <div class="filter-row" role="group" aria-label="Filter by instrument"><button class="chip-filter" type="button" data-tfilter="" aria-pressed="true">All</button>${withTeachers.map(i => `<button class="chip-filter" type="button" data-tfilter="${i.id}" aria-pressed="false">${i.name}</button>`).join("")}</div>
-        <div class="filter-row"><span class="note" id="tcount" aria-live="polite"></span><span class="note">Teachers work across our studios and online. When you book a trial, the booking page shows who's available at your studio and time.</span></div>
+        <div class="filter-row"><span class="sr-only" id="tcount" aria-live="polite"></span><span class="note">Teachers work across our studios and online. When you book a trial, the booking page shows who's available at your studio and time.</span></div>
       </div>
     </div>
     <div class="t-feed" id="tfeed">${TEACHERS.map(post).join("")}</div>
